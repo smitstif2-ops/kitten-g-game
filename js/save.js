@@ -3,8 +3,29 @@
   class SaveManager {
     constructor(key='kitten-g-pro-save-v1'){
       this.key=key;
+      this.devKey='kitten-g-dev-mode-v1';
       this.defaults={coins:0,highestLevel:0,unlockedCostumes:['default'],equippedCostume:'default',bestScore:0,stars:[0,0,0,0,0],settings:{music:true,sfx:true,volume:0.8,reducedMotion:false}};
+      this.devMode=this.resolveDevMode();
       this.data=this.load();
+      this.applyDevUnlocks();
+    }
+    resolveDevMode(){
+      try{
+        const q=new URLSearchParams(location.search),flag=q.get('dev');
+        if(flag==='1'){localStorage.setItem(this.devKey,'1');return true;}
+        if(flag==='0'){localStorage.removeItem(this.devKey);return false;}
+        return localStorage.getItem(this.devKey)==='1';
+      }catch(e){return false;}
+    }
+    applyDevUnlocks(){
+      if(!this.devMode)return;
+      this.data.highestLevel=4;
+    }
+    setDevMode(enabled){
+      this.devMode=!!enabled;
+      try{if(this.devMode)localStorage.setItem(this.devKey,'1');else localStorage.removeItem(this.devKey);}catch(e){}
+      if(this.devMode)this.data.highestLevel=4;
+      this.commit();
     }
     load(){
       try{
@@ -22,6 +43,7 @@
       const settings={...this.data.settings};
       this.data=JSON.parse(JSON.stringify(this.defaults));
       this.data.settings=settings;
+      this.applyDevUnlocks();
       this.commit();
     }
     unlockLevel(index){ if(index>this.data.highestLevel){this.data.highestLevel=Math.min(4,index);this.commit();} }
