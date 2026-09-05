@@ -23,7 +23,8 @@
     <button id="btn-shop-hud" class="hud-btn">Магазин</button>
   </div>
 </div>
-<div id="boss-wrap"><strong>Глиняный Хаос</strong><div id="boss-bar"><div id="boss-fill"></div></div></div>
+<div id="boss-wrap"><strong id="boss-phase">Глиняный Хаос</strong><div id="boss-bar"><div id="boss-fill"></div></div></div>
+<div id="combo-wrap"><span id="combo-text">COMBO x2</span></div>
 <div id="toast"></div>
 
 <div id="touch-controls">
@@ -37,7 +38,7 @@
 
 <section id="menu-screen" class="screen hidden">
   <div class="card menu-card">
-    <div class="hero-emoji">🐱</div><h1 class="menu-title">Котик G:<br>Пластилиновый мир</h1>
+    <canvas id="menu-hero" class="menu-hero-canvas" width="360" height="250"></canvas><h1 class="menu-title">Котик G:<br>Пластилиновый мир</h1>
     <p class="subtitle">Полированная браузерная платформенная игра с пятью локациями, магазином и финальным боссом.</p>
     <div class="world-badges"><span class="world-badge">🐟 Долина</span><span class="world-badge">🐦 Берег</span><span class="world-badge">⚽ Руины</span><span class="world-badge">🦋 Снег</span><span class="world-badge">👹 Замок</span></div>
     <div class="menu-stats"><div class="stat-card">🪙 <span id="menu-coins">0</span><small>Монеты</small></div><div class="stat-card">⭐ <span id="menu-best">0</span><small>Лучший счёт</small></div></div>
