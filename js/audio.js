@@ -10,6 +10,8 @@
       if(name==='collect'){this.tone(600,.08,'sine',.022);this.tone(840,.11,'sine',.018,.05);}
       if(name==='hurt')this.tone(150,.16,'sawtooth',.032);
       if(name==='stomp'){this.tone(220,.06,'square',.025);this.tone(440,.08,'triangle',.02,.04);}
+      if(name==='combo'){this.tone(660,.07,'triangle',.022);this.tone(880,.09,'triangle',.018,.04);}
+      if(name==='splash'){this.tone(180,.05,'sine',.018);this.tone(120,.12,'triangle',.012,.03);}
       if(name==='checkpoint'){this.tone(660,.09,'sine',.018);this.tone(880,.12,'sine',.02,.06);}
       if(name==='win'){[523,659,784].forEach((f,i)=>this.tone(f,.16,'triangle',.025,i*.08));}
       if(name==='boss')this.tone(170,.08,'square',.03);
