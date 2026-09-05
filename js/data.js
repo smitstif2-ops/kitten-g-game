@@ -1,65 +1,28 @@
 (function(KG){
   'use strict';
+  const P='prod/';
   KG.Assets = {
-    backgrounds: ['level-1-hd.jpg','level-2-hd.jpg','level-3-hd.jpg','level-4-hd.jpg','level-5-hd.jpg'],
-    hero: {run:'hero-run.png', jump:'hero-jump.png', fall:'hero-fall.png', win:'hero-win.png'},
-    costumes: {
-      default:{id:'default',name:'Котик G',price:0,image:'hero-run.png',description:'Оригинальный герой'},
-      bee:{id:'bee',name:'Пчёлка',price:25,image:'costume-bee.png',description:'Лёгкий костюм пчёлки'},
-      dino:{id:'dino',name:'Динозавр',price:45,image:'costume-dino.png',description:'Костюм маленького динозавра'},
-      space:{id:'space',name:'Космонавт',price:70,image:'costume-space.png',description:'Космический исследователь'},
-      bunny:{id:'bunny',name:'Зайчик',price:90,image:'costume-bunny.png',description:'Розовый костюм зайчика'}
+    backgrounds:[P+'backgrounds/level1_valley.webp',P+'backgrounds/level2_island.webp',P+'backgrounds/level3_ruins.webp',P+'backgrounds/level4_snow.webp',P+'backgrounds/level5_lava.webp'],
+    hero:{baseline:306,canvas:320,idle:[P+'hero/base/idle_side.png'],run:[P+'hero/base/run_1.png',P+'hero/base/run_2.png',P+'hero/base/run_3.png',P+'hero/base/run_2.png'],jump:[P+'hero/base/jump_up.png'],fall:[P+'hero/base/jump_peak.png'],land:[P+'hero/base/land.png'],hurt:[P+'hero/base/hurt.png'],victory:[P+'hero/base/victory.png']},
+    costumes:{
+      default:{id:'default',name:'Котик G',price:0,description:'Оригинальный герой',preview:P+'hero/base/idle_3q.png',animations:null},
+      bee:{id:'bee',name:'Пчёлка',price:25,description:'Лёгкий костюм пчёлки',preview:P+'hero/bee/idle.png',animations:{idle:[P+'hero/bee/idle.png'],run:[P+'hero/bee/run.png'],jump:[P+'hero/bee/jump.png'],fall:[P+'hero/bee/jump.png'],land:[P+'hero/bee/idle.png'],hurt:[P+'hero/bee/jump.png'],victory:[P+'hero/bee/victory.png']}},
+      dino:{id:'dino',name:'Динозавр',price:45,description:'Костюм маленького динозавра',preview:P+'hero/dino/idle.png',animations:{idle:[P+'hero/dino/idle.png'],run:[P+'hero/dino/run.png'],jump:[P+'hero/dino/jump.png'],fall:[P+'hero/dino/jump.png'],land:[P+'hero/dino/idle.png'],hurt:[P+'hero/dino/jump.png'],victory:[P+'hero/dino/victory.png']}},
+      space:{id:'space',name:'Космонавт',price:70,description:'Космический исследователь',preview:P+'hero/space/idle.png',animations:{idle:[P+'hero/space/idle.png'],run:[P+'hero/space/run.png'],jump:[P+'hero/space/jump.png'],fall:[P+'hero/space/jump.png'],land:[P+'hero/space/idle.png'],hurt:[P+'hero/space/jump.png'],victory:[P+'hero/space/victory.png']}},
+      bunny:{id:'bunny',name:'Зайчик',price:90,description:'Розовый костюм зайчика',preview:P+'hero/bunny/idle.png',animations:{idle:[P+'hero/bunny/idle.png'],run:[P+'hero/bunny/run.png'],jump:[P+'hero/bunny/jump.png'],fall:[P+'hero/bunny/jump.png'],land:[P+'hero/bunny/idle.png'],hurt:[P+'hero/bunny/jump.png'],victory:[P+'hero/bunny/victory.png']}}
     },
-    items:{coin:'item-coin.png',fish:'item-fish.png',bird:'item-bird.png',butterfly:'item-butterfly.png',ball:'item-ball.png'},
-    enemies:{hedgehog:'enemy-hedgehog.png',crab:'enemy-crab.png',seagull:'enemy-seagull.png',spikeball:'enemy-spikeball.png',slime:'enemy-slime.png'},
-    boss:'boss.png'
+    items:{coin:P+'items/coin.png',fish:P+'items/fish.png',bird:P+'items/bird.png',butterfly:P+'items/butterfly.png',ball:P+'items/ball.png',portalBlue:P+'items/portal_blue.png',portalGold:P+'items/portal_gold.png'},
+    enemies:{hedgehog:[0,1,2,3].map(i=>P+`enemies/hedgehog/0${i}.png`),crab:[0,1,2,3].map(i=>P+`enemies/crab/0${i}.png`),seagull:[0,1,2,3].map(i=>P+`enemies/seagull/0${i}.png`),spikeball:[0,1,2,3].map(i=>P+`enemies/spikeball/0${i}.png`),slime:[0,1,2,3].map(i=>P+`enemies/slime/0${i}.png`),rock:[0,1,2,3].map(i=>P+`enemies/rock/0${i}.png`)},
+    boss:{idle:P+'boss/idle.png',walk:P+'boss/walk.png',roar:P+'boss/roar.png',attackFire:P+'boss/attack_fire.png',attackPunch:P+'boss/attack_punch.png',stunned:P+'boss/stunned.png',shield:P+'boss/shield.png',defeated:P+'boss/defeated.png',sleep:P+'boss/sleep.png'},
+    tiles:{grass:P+'tiles/grass_block.png',moss:P+'tiles/moss_block.png',ice:P+'tiles/ice_block.png',lava:P+'tiles/lava_block.png',wood:P+'tiles/wood_block.png',grassPlatform:P+'tiles/grass_platform.png',ropePlatform:P+'tiles/rope_platform.png',bridge:P+'tiles/stone_bridge.png',crate:P+'tiles/crate.png',torch:P+'tiles/torch.png',rocks:P+'tiles/rocks.png',bush:P+'tiles/bush.png',flowers:P+'tiles/flowers.png',waterfall:[0,1,2,3].map(i=>P+`tiles/waterfall/0${i}.png`),water:[0,1,2,3].map(i=>P+`tiles/water/0${i}.png`),flag:[0,1,2,3].map(i=>P+`tiles/flag/0${i}.png`),foliage:[0,1].map(i=>P+`tiles/foliage_sway/0${i}.png`)},
+    environment:{treeValley:P+'dynamic/tree_valley.png'}
   };
 
   KG.Levels = [
-    {
-      id:0,name:'Зелёная долина',subtitle:'Рыбный луг',emoji:'🐟',objective:'Собери 5 рыбок и войди в портал',background:0,width:3400,spawn:[140,690],goalX:3180,par:65,
-      platforms:[[0,760,600,70],[720,650,320,44],[1120,530,300,44],[1530,650,300,44],[1960,500,300,44],[2390,620,330,44],[2850,760,550,70]],
-      moving:[[910,390,235,38,'x',135,1.25]],
-      spikes:[[600,740,112],[1420,740,100],[2290,740,100]],
-      enemies:[['hedgehog',1220,500,1120,1380,94],['slime',2050,470,1960,2220,88]],
-      mission:[['fish',300,690],['fish',800,580],['fish',1210,460],['fish',2050,430],['fish',2500,550]],
-      coins:[[460,675],[1000,320],[1660,580],[2750,690]],
-      checkpoint:[1700,610]
-    },
-    {
-      id:1,name:'Морской берег',subtitle:'Птичьи высоты',emoji:'🐦',objective:'Поймай 5 птичек среди движущихся платформ',background:1,width:3800,spawn:[120,690],goalX:3570,par:78,
-      platforms:[[0,760,520,70],[650,620,260,44],[1050,470,260,44],[1460,310,260,44],[1880,470,280,44],[2300,285,270,44],[2750,470,280,44],[3250,760,550,70]],
-      moving:[[910,300,215,38,'y',150,1.7],[1720,225,215,38,'x',145,1.45],[2580,230,205,38,'y',160,1.55]],
-      spikes:[[520,740,115],[2150,740,125],[3090,740,120]],
-      enemies:[['crab',740,590,660,870,102],['seagull',1980,440,1880,2140,116],['crab',2850,440,2760,3010,108]],
-      mission:[['bird',770,550],['bird',1140,400],['bird',1540,240],['bird',2390,215],['bird',2840,400]],
-      coins:[[410,680],[1270,670],[1810,145],[2640,150],[3400,690]],
-      checkpoint:[1920,420]
-    },
-    {
-      id:2,name:'Лес и руины',subtitle:'Шар и корзина',emoji:'⚽',objective:'Проведи шар через препятствия и закати в корзину',background:2,width:4100,spawn:[120,690],par:85,
-      platforms:[[0,760,760,70],[880,635,320,44],[1330,760,430,70],[1860,590,320,44],[2310,760,470,70],[2910,620,320,44],[3390,760,710,70]],
-      moving:[[1580,340,225,38,'y',145,1.6],[2600,350,210,38,'x',150,1.45]],
-      spikes:[[760,740,115],[1760,740,105],[2790,740,105]],
-      enemies:[['spikeball',1970,560,1870,2110,92],['hedgehog',3000,590,2920,3150,92]],
-      mission:[],coins:[[330,680],[980,560],[1620,260],[2460,680],[3010,550],[3590,680]],
-      ball:[500,700],basket:[3810,670],checkpoint:[2140,710]
-    },
-    {
-      id:3,name:'Снежные горы',subtitle:'Бабочки на вершине',emoji:'🦋',objective:'Собери 4 бабочки и доберись до домика',background:3,width:4400,spawn:[120,690],house:[4160,585],par:92,
-      platforms:[[0,760,560,70],[680,590,270,44],[1100,425,270,44],[1530,255,260,44],[1940,435,290,44],[2380,245,260,44],[2820,425,270,44],[3250,215,250,44],[3630,425,270,44],[4010,760,390,70]],
-      moving:[[930,215,205,38,'y',140,1.7],[1780,130,215,38,'x',140,1.65],[3040,115,205,38,'y',150,1.55]],
-      spikes:[[560,740,110],[2250,740,120],[3900,740,105]],
-      enemies:[['seagull',2040,405,1960,2190,118],['spikeball',3720,395,3640,3860,90]],
-      mission:[['butterfly',770,515],['butterfly',1610,185],['butterfly',2470,175],['butterfly',3330,150]],
-      coins:[[410,680],[1180,355],[2060,360],[2910,355],[3720,355]],checkpoint:[2250,690]
-    },
-    {
-      id:4,name:'Замок босса',subtitle:'Глиняный Хаос',emoji:'👹',objective:'Победи босса: атакуй сверху, когда он светится',background:4,width:3600,spawn:[140,690],par:120,
-      platforms:[[0,760,3600,70],[560,545,320,44],[1260,410,320,44],[2040,545,320,44],[2820,350,320,44]],
-      moving:[[940,250,230,38,'y',125,1.55],[2450,220,230,38,'x',145,1.45]],
-      spikes:[[900,740,115],[1660,740,125],[2500,740,115],[3290,740,90]],
-      enemies:[],mission:[],coins:[[690,475],[1380,340],[2150,475],[2940,280]],boss:[3120,610],checkpoint:[2320,690]
-    }
+    {id:0,name:'Зелёная долина',subtitle:'Рыбный луг',emoji:'🐟',objective:'Собери 5 рыбок и войди в портал',background:0,surface:'grass',width:3400,spawn:[140,690],goalX:3180,par:65,platforms:[[0,760,600,70],[720,650,320,44],[1120,530,300,44],[1530,650,300,44],[1960,500,300,44],[2390,620,330,44],[2850,760,550,70]],moving:[[910,390,235,38,'x',135,1.25]],spikes:[[600,740,112],[1420,740,100],[2290,740,100]],enemies:[['hedgehog',1220,500,1120,1380,94],['slime',2050,470,1960,2220,88]],mission:[['fish',300,690],['fish',800,580],['fish',1210,460],['fish',2050,430],['fish',2500,550]],coins:[[460,675],[1000,320],[1660,580],[2750,690]],checkpoint:[1700,610],fx:{water:true,waterZones:[[600,742,120,170],[1420,742,540,170],[2290,742,100,170]],waterfalls:[[620,575,90,145],[1770,415,78,130],[2630,505,82,130]],trees:[[420,760,210],[2250,760,190]],foliage:[[1050,742],[2690,742]]}},
+    {id:1,name:'Морской берег',subtitle:'Птичьи высоты',emoji:'🐦',objective:'Поймай 5 птичек среди движущихся платформ',background:1,surface:'moss',width:3800,spawn:[120,690],goalX:3570,par:78,platforms:[[0,760,520,70],[650,620,260,44],[1050,470,260,44],[1460,310,260,44],[1880,470,280,44],[2300,285,270,44],[2750,470,280,44],[3250,760,550,70]],moving:[[910,300,215,38,'y',150,1.7],[1720,225,215,38,'x',145,1.45],[2580,230,205,38,'y',160,1.55]],spikes:[[520,740,115],[2150,740,125],[3090,740,120]],enemies:[['crab',740,590,660,870,102],['seagull',1980,440,1880,2140,116],['crab',2850,440,2760,3010,108]],mission:[['bird',770,550],['bird',1140,400],['bird',1540,240],['bird',2390,215],['bird',2840,400]],coins:[[410,680],[1270,670],[1810,145],[2640,150],[3400,690]],checkpoint:[1920,420],fx:{water:true,waterZones:[[520,742,130,170],[2120,742,180,170],[3090,742,160,170]],waterfalls:[[3050,505,90,140]],flags:[[1580,310,90],[3260,760,92]],foliage:[[560,742],[3100,742]]}},
+    {id:2,name:'Лес и руины',subtitle:'Шар и корзина',emoji:'⚽',objective:'Проведи шар через препятствия и закати в корзину',background:2,surface:'moss',width:4100,spawn:[120,690],par:85,platforms:[[0,760,760,70],[880,635,320,44],[1330,760,430,70],[1860,590,320,44],[2310,760,470,70],[2910,620,320,44],[3390,760,710,70]],moving:[[1580,340,225,38,'y',145,1.6],[2600,350,210,38,'x',150,1.45]],spikes:[[760,740,115],[1760,740,105],[2790,740,105]],enemies:[['spikeball',1970,560,1870,2110,92],['hedgehog',3000,590,2920,3150,92]],mission:[],coins:[[330,680],[980,560],[1620,260],[2460,680],[3010,550],[3590,680]],ball:[500,700],basket:[3810,670],checkpoint:[2140,710],fx:{water:true,waterZones:[[760,742,120,170],[1760,742,100,170],[2790,742,120,170]],waterfalls:[[1110,520,82,130],[2500,545,78,120]],trees:[[1520,760,180]],flags:[[2210,760,86]],foliage:[[780,742],[3300,742]]}},
+    {id:3,name:'Снежные горы',subtitle:'Бабочки на вершине',emoji:'🦋',objective:'Собери 4 бабочки и доберись до домика',background:3,surface:'ice',width:4400,spawn:[120,690],house:[4160,585],par:92,platforms:[[0,760,560,70],[680,590,270,44],[1100,425,270,44],[1530,255,260,44],[1940,435,290,44],[2380,245,260,44],[2820,425,270,44],[3250,215,250,44],[3630,425,270,44],[4010,760,390,70]],moving:[[930,215,205,38,'y',140,1.7],[1780,130,215,38,'x',140,1.65],[3040,115,205,38,'y',150,1.55]],spikes:[[560,740,110],[2250,740,120],[3900,740,105]],enemies:[['seagull',2040,405,1960,2190,118],['spikeball',3720,395,3640,3860,90]],mission:[['butterfly',770,515],['butterfly',1610,185],['butterfly',2470,175],['butterfly',3330,150]],coins:[[410,680],[1180,355],[2060,360],[2910,355],[3720,355]],checkpoint:[2250,690],fx:{water:true,waterfalls:[[1250,470,78,135],[3450,465,78,135]],flags:[[1750,255,90],[4100,760,90]],snow:true}},
+    {id:4,name:'Замок босса',subtitle:'Глиняный Хаос',emoji:'👹',objective:'Победи босса: атакуй сверху, когда он светится',background:4,surface:'lava',width:3600,spawn:[140,690],par:120,platforms:[[0,760,3600,70],[560,545,320,44],[1260,410,320,44],[2040,545,320,44],[2820,350,320,44]],moving:[[940,250,230,38,'y',125,1.55],[2450,220,230,38,'x',145,1.45]],spikes:[[900,740,115],[1660,740,125],[2500,740,115],[3290,740,90]],enemies:[],mission:[],coins:[[690,475],[1380,340],[2150,475],[2940,280]],boss:[3120,610],checkpoint:[2320,690],fx:{lava:true,flags:[[780,760,90],[2210,545,90],[3020,350,90]],embers:true}}
   ];
 })(window.KG = window.KG || {});
