@@ -2,6 +2,9 @@
 
 Browser platformer with clay/plasticine production assets.
 
+## Play
+https://smitstif2-ops.github.io/kitten-g-game/
+
 ## v3 gameplay polish
 - grounded player baseline: feet align to collision surface
 - coyote time + jump buffering + variable jump height
@@ -15,7 +18,7 @@ Browser platformer with clay/plasticine production assets.
 - particles, screen shake, speed lines and checkpoints
 - save data, costumes, level stars and settings
 
-## Run
+## Local run
 Use START_GAME.command on macOS or START_GAME.bat on Windows, then open the local URL printed by the launcher.
 
-The optimized `dist/` build uses 2 sprite atlases plus 5 WebP backgrounds.
+The optimized production build uses 2 sprite atlases plus 5 WebP backgrounds.
