@@ -69,13 +69,12 @@
   R.boss=function(b,cameraX,time){
     if(!b)return;
     const c=this.ctx,x=Math.round(b.x-cameraX),feet=Math.round(b.y),facing=(b.facing||-1)<0;
+    // The original fire and shield source poses are visibly cropped at their atlas edges.
+    // Use the clean idle body for those phases and communicate the state with procedural effects.
     let file=KG.Assets.boss.idle;
     if(b.dead)file=KG.Assets.boss.defeated;
     else if(b.vulnerable)file=KG.Assets.boss.stunned;
-    else if(b.state==='attackFire')file=KG.Assets.boss.attackFire;
     else if(b.state==='attackPunch')file=KG.Assets.boss.attackPunch;
-    else if(b.state==='shield')file=KG.Assets.boss.shield;
-    else if(b.state==='roar')file=KG.Assets.boss.roar;
     else if(b.state==='walk')file=KG.Assets.boss.walk;
     const src=this.source(file),m=src?bossMetrics(this,file):null;
 
@@ -86,13 +85,15 @@
       c.beginPath();c.ellipse(x,feet-4,118+Math.sin(time*9)*5,30,0,0,Math.PI*2);c.stroke();c.setLineDash([]);
     }
     if(!b.dead&&b.state==='attackFire'){
-      c.fillStyle='rgba(255,116,48,.12)';c.beginPath();c.arc(x,feet-105,112+Math.sin(time*8)*4,0,Math.PI*2);c.fill();
+      c.fillStyle='rgba(255,116,48,.10)';c.beginPath();c.arc(x,feet-105,112+Math.sin(time*8)*4,0,Math.PI*2);c.fill();
+      const dir=facing?-1:1,fx=x+dir*83,fy=feet-118,rg=c.createRadialGradient(fx-5,fy-5,2,fx,fy,28+Math.sin(time*10)*3);
+      rg.addColorStop(0,'#fff4aa');rg.addColorStop(.42,'#ff9b32');rg.addColorStop(1,'rgba(219,48,24,0)');c.fillStyle=rg;c.beginPath();c.arc(fx,fy,31,0,Math.PI*2);c.fill();
     }
     c.restore();
 
     if(src&&m){
       // All boss states share the same 520x420 atlas cell. Use one fixed scale and cell center
-      // so extended punch/shield poses cannot resize or slide the body between states.
+      // so extended punch poses cannot resize or slide the body between states.
       const scale=b.dead?.50:.54;
       const dx=-(src.sw*.5)*scale,dy=feet-m.maxY*scale;
       c.save();c.translate(x,0);if(facing)c.scale(-1,1);
