@@ -11,7 +11,7 @@ https://smitstif2-ops.github.io/kitten-g-game/?dev=1
 ## v8 overhaul
 - 9-life system with corrected 3-star logic
 - lives carry between completed levels instead of resetting every level
-- mouse controls on desktop: hold left mouse button left/right of screen center to move; right or middle mouse button jumps
+- mouse-only desktop control: move the cursor left/right of screen center to steer, keep it near center to stop, left click to jump; right/middle click also jump
 - mobile controls use unified Pointer Events, larger buttons, multi-touch, pointer capture and safe-area spacing
 - levels 1–4 expanded to roughly 5.4–6.5k world units; final level expanded to 5.6k with a longer pre-boss route
 - level 3 remains a clear rune-collection mission; the ball mechanic is gone
