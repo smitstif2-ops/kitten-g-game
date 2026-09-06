@@ -74,6 +74,12 @@
       c.drawImage(src.im,src.sx,src.sy,src.sw,src.sh,drawX,y,drawW,h);
       c.restore();return;
     }
+    const n=Math.max(3,Math.round(drawW/24)),cell=drawW/n;
+    c.save();c.shadowColor=level.surface==='lava'?'rgba(255,85,35,.42)':'rgba(15,20,27,.34)';c.shadowBlur=8;c.shadowOffsetY=4;
+    const metal=c.createLinearGradient(0,base-34,0,base);metal.addColorStop(0,level.surface==='lava'?'#ffb07a':'#f5f6f8');metal.addColorStop(.5,level.surface==='lava'?'#98544b':'#b9bec6');metal.addColorStop(1,level.surface==='lava'?'#51343a':'#676d76');
+    c.fillStyle=metal;c.strokeStyle=level.surface==='lava'?'#5b3031':'#4c5159';c.lineWidth=1.5;
+    for(let i=0;i<n;i++){const l=drawX+i*cell+1,r=drawX+(i+1)*cell-1,t=drawX+(i+.5)*cell;c.beginPath();c.moveTo(l,base-4);c.lineTo(t,base-34);c.lineTo(r,base-4);c.closePath();c.fill();c.stroke();}
+    c.shadowBlur=0;c.fillStyle=level.surface==='lava'?'#5b383b':'#646b74';c.fillRect(drawX,base-6,drawW,6);c.restore();
   };
 
   R.drawWaterfalls=function(level,cameraX,time){
