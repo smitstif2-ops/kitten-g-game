@@ -91,9 +91,10 @@
     c.restore();
 
     if(src&&m){
-      const visibleH=Math.max(1,m.maxY-m.minY+1),visibleCenter=(m.minX+m.maxX)/2;
-      const targetH=b.dead?170:198,scale=targetH/visibleH;
-      const dx=-visibleCenter*scale,dy=feet-m.maxY*scale;
+      // All boss states share the same 520x420 atlas cell. Use one fixed scale and cell center
+      // so extended punch/shield poses cannot resize or slide the body between states.
+      const scale=b.dead?.50:.54;
+      const dx=-(src.sw*.5)*scale,dy=feet-m.maxY*scale;
       c.save();c.translate(x,0);if(facing)c.scale(-1,1);
       if(b.flash>0)c.filter='brightness(1.45) saturate(.75)';
       c.drawImage(src.im,src.sx,src.sy,src.sw,src.sh,dx,Math.round(dy),src.sw*scale,src.sh*scale);c.restore();
