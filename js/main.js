@@ -31,11 +31,18 @@
     }).catch(err=>{cancelAnimationFrame(raf);text.textContent='Ошибка загрузки: '+err.message;console.error(err);});
   };
 
-  // Load the v8 runtime pass before creating InputManager/Game so mouse/mobile controls,
-  // nine lives, longer level data, anchor fixes and logic corrections are active from boot.
+  const loadInputCompat=()=>{
+    const compat=document.createElement('script');
+    compat.src='./js/v8-1-input.js';
+    compat.onload=boot;
+    compat.onerror=()=>{console.error('v8-1-input.js failed to load');boot();};
+    document.head.appendChild(compat);
+  };
+
+  // Load runtime fixes before creating InputManager/Game.
   const patch=document.createElement('script');
   patch.src='./js/v8-polish.js';
-  patch.onload=boot;
+  patch.onload=loadInputCompat;
   patch.onerror=()=>{console.error('v8-polish.js failed to load');boot();};
   document.head.appendChild(patch);
 })(window.KG = window.KG || {});
