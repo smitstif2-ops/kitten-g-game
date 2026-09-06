@@ -1,24 +1,21 @@
-# Kitten G — Production v3
+# Kitten G — v6
 
 Browser platformer with clay/plasticine production assets.
 
 ## Play
 https://smitstif2-ops.github.io/kitten-g-game/
 
-## v3 gameplay polish
-- grounded player baseline: feet align to collision surface
-- coyote time + jump buffering + variable jump height
-- camera dead-zone and velocity look-ahead
-- enemy-specific AI: crab charge, seagull dive, slime hop, rolling hazards
-- water hazard zones with splash particles and checkpoint respawn
-- stomp combo scoring
-- improved boss state machine: walk, fire volley, dash/punch, shield, vulnerable stun
-- boss attack telegraphs and dynamic phase label
-- animated environment: water, waterfalls, foliage, flags, snow, embers
-- particles, screen shake, speed lines and checkpoints
-- save data, costumes, level stars and settings
+## Developer mode
+https://smitstif2-ops.github.io/kitten-g-game/?dev=1
 
-## Local run
-Use START_GAME.command on macOS or START_GAME.bat on Windows, then open the local URL printed by the launcher.
+## v6 polish
+- consistent visible character size across all costumes
+- new packed production hero atlas and real spike art loaded by GitHub Pages
+- removed artificial guide lines above platforms
+- opaque waterfalls with grounded splash/foam treatment
+- decorative trees snap to real platform tops
+- clearer level 3 ball objective with on-screen push/basket guidance
+- more responsive ball pushing
+- v5 forgiving jump controls retained
 
-The optimized production build uses 2 sprite atlases plus 5 WebP backgrounds.
+Use Cmd+Shift+R on macOS after a deployment if the browser still shows cached assets.

@@ -1,0 +1,20 @@
+(function(KG){
+  'use strict';
+  KG.AtlasSprites=KG.AtlasSprites||{};
+  const A=KG.AtlasSprites, atlas='hero-v6.webp';
+  const set=(file,x,y,w,h)=>{A[file]={atlas,x,y,w,h};};
+  set('prod/hero/base/idle_side.png',4,4,142,146);
+  set('prod/hero/base/idle_3q.png',150,4,144,147);
+  set('prod/hero/base/run_1.png',298,4,161,142);
+  set('prod/hero/base/run_2.png',4,155,162,142);
+  set('prod/hero/base/run_3.png',170,155,165,138);
+  set('prod/hero/base/run_4.png',339,155,164,137);
+  set('prod/hero/base/jump_up.png',4,301,144,165);
+  set('prod/hero/base/jump_peak.png',152,301,149,137);
+  set('prod/hero/base/fall_down.png',305,301,154,132);
+  set('prod/hero/base/land.png',4,470,150,120);
+  set('prod/hero/base/hurt.png',158,470,146,128);
+  set('prod/hero/base/victory.png',308,470,142,163);
+  A['prod/tiles/spikes_v4.png']={atlas:'hazards-v4.webp',x:0,y:0,w:370,h:153};
+  KG.AtlasFiles=['characters.webp','environment.webp','hero-v6.webp','hazards-v4.webp'];
+})(window.KG=window.KG||{});
