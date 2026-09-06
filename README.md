@@ -10,8 +10,9 @@ https://smitstif2-ops.github.io/kitten-g-game/?dev=1
 
 ## v6 polish
 - consistent visible character size across all costumes
-- new packed production hero atlas and real spike art loaded by GitHub Pages
+- verified production atlases retained for stable loading
 - removed artificial guide lines above platforms
+- readable spike rendering with a safe drawn fallback
 - opaque waterfalls with grounded splash/foam treatment
 - decorative trees snap to real platform tops
 - clearer level 3 ball objective with on-screen push/basket guidance
